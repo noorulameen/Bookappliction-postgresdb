@@ -1,0 +1,58 @@
+extends layout
+block content
+	div(class="row rank")
+		h3 #{page_title}
+		div(class="content")
+			br
+			div(class="search")
+				form(role="form", action="/search", method="get")
+					input.form-control.input-sm(type='text', name="srch", maxlength='64', placeholder='Search')
+					button.btnsrc.btn-primary.btn-sm(type='submit') Search
+			div(class="tab-pane", id="books")
+				div(row="")
+					div(class="col-md")
+						div(class="rankCont")
+								table(id="books_list" class="table table-bordered dt-responsive")
+									thead
+										tr(class="tableth")
+											th(rowspan="2") Id
+										tr(class="tableth")
+											th Book Name
+											th User id
+											th ISBN Code
+											th Catalogue
+											th Edit
+											th Delete
+											
+									tbody
+										- for (i in data)
+											tr
+												td(style='text-align: center')
+													=data[i]['id']
+												td(style='text-align: center')
+													=data[i]['bname']
+												td(style='text-align: center')
+													=data[i]['ctuserid']
+												td(style='text-align: center')
+													=data[i]['isbncode']
+												td(style='text-align: center')
+													=data[i]['catalogue']
+												td(style='text-align: center')
+													- if(data[i]['ctuserid'] == crtuser)
+														a(href!="/editbook?id=#{data[i]['id']}")="Edit Book"
+													- else
+														a(href!="" class="btn btn-large disabled")="No Access"
+												td(style='text-align: center')
+													- if(data[i]['ctuserid'] == crtuser)
+														a(href!="/delete?id=#{data[i]['id']} ")="Delete Book"
+													- else
+														a(href!="" class="btn btn-large disabled")="No Access"
+
+						script(type="text/javascript").
+							$("#books_list").dataTable({
+										"iDisplayLength": 5, //Number of rows
+										"bLengthChange": false, //Disable "show 1-n entries"
+										bFilter: false, //Disable filter
+										bInfo: false,
+										"order": [[ 1, "desc" ]]
+										});

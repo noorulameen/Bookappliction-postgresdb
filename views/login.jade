@@ -1,0 +1,27 @@
+extends layout
+block content
+  .container-fluid.text-center
+    .row
+      .col-md-3.col-md-offset-5.loginpan
+        .login-panel.panel.panel-default.loginpan1
+          .panel-heading
+            h3.panel-title Please Sign In
+          .panel-body
+            a(href="/auth/facebook")
+             img(class="menu-trigger" src="/images/facebook_log.png")
+            br
+            br
+            a(href="/auth/google")
+             img(class="menu-trigger" src="/images/btn-Login-with-googlePlus.gif", width="202px")
+            br
+            br
+            - if (message.length > 0)
+                div(class="alert alert-danger")= message
+            form(role="form", action="/users/login", method="post")
+              fieldset
+                .form-group
+                  input.form-control(type="username", placeholder="User Name", name="username", autofocus="")
+                .form-group
+                  input.form-control(type="password", placeholder="Password", name="password", value="")                
+                button(class="btn btn-lg btn-success btn-block",type="submit",value="Submit") Login
+

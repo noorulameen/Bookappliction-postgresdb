@@ -1,0 +1,17 @@
+extends layout
+block content
+  .col-md-3.col-md-offset-5.loginpan
+    .login-panel.panel.panel-default
+      .panel-heading
+        h3.panel-title #{page_title}
+      .panel-body
+        form(role="form", action="/insertbook", method="post")
+          fieldset
+            .form-group
+              input.form-control(type="text", placeholder="Book Name", name="bookname", class="form-control" required)
+            .form-group
+              input.form-control(type="text", placeholder="ISBN Code", name="isbncode", class="form-control" required)
+            .form-group
+              input.form-control(type="text", placeholder="Catalogue", name="catalogue", class="form-control" required)                 
+            button(class="btn btn-lg btn-success btn-block",type="submit",value="Submit") Submit
+
